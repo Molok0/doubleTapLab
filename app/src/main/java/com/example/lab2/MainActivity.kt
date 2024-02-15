@@ -3,7 +3,6 @@ package com.example.lab2
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import androidx.activity.ComponentActivity
@@ -18,6 +17,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         Log.d("MainActivity", "onCreate")
     }
 
@@ -30,29 +30,16 @@ class MainActivity : ComponentActivity() {
     override fun onResume() {
         super.onResume()
         Log.d("MainActivity", "onResume")
-        val countText: TextView = findViewById<TextView>(R.id.textCount)
-        val textButton: Button = findViewById<Button>(R.id.square_of_the_number)
+        val countText: TextView = findViewById(R.id.textCount)
         countText.text = counter.intValue.toString()
-
+        val textButton: Button = findViewById(R.id.square_of_the_number)
         textButton.setOnClickListener {
             val intent = Intent(this, SquareOfTheNumber::class.java).apply {
-                val bundle: Bundle = Bundle().apply {
-                    putString("sqrt", counter.intValue.toString())
-                }
-                putExtras(bundle)
+                putExtra("sqrt", counter.intValue.toString())
             }
             startActivity(intent)
         }
     }
-//    fun toClickTo(view:View){
-//        val intent = Intent(this, SquareOfTheNumber::class.java).apply {
-//            val bundle: Bundle = Bundle().apply {
-//                putString("sqrt", counter.intValue.toString())
-//            }
-//            putExtras(bundle)
-//        }
-//        startActivity(intent)
-//    }
 
     override fun onStop() {
         super.onStop()
